@@ -37,11 +37,18 @@ describe 'the count of lines of coffeescript code', ->
                         still a comment
                         ### END BLOCK''').toEqual 1
 
+    describe 'a block comment at the end of a line',->
+      it 'has no lines',->
+        expect(count '''foo()###BLOCK COMMENT
+                        still a comment
+                        ### END BLOCK''').toEqual 0
+
   it 'is two for a string with two lines of code',->
     expect(count('1+1"\n1+1')).toEqual 2
     expect(count('1+1"\n1+1')).toEqual 2
 
 Line = (require 'calculator').Line
+
 describe 'lines', ->
   describe 'comments',->
     it 'has no spaces in front of the #', ->
